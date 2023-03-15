@@ -11,9 +11,9 @@ Q = np.array(([1.0, 0.0, 0.0, -160.0],
 
 
 # Load a MiDas model for depth estimation
-model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
+#model_type = "DPT_Large"     # MiDaS v3 - Large     (highest accuracy, slowest inference speed)
 #model_type = "DPT_Hybrid"   # MiDaS v3 - Hybrid    (medium accuracy, medium inference speed)
-#model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
+model_type = "MiDaS_small"  # MiDaS v2.1 - Small   (lowest accuracy, highest inference speed)
 
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
 
@@ -32,7 +32,7 @@ else:
 
 
 # Open up the video capture from a webcam
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
 
@@ -117,7 +117,7 @@ def create_output(vertices, colors, filename):
 
 output_file = 'pointCloudDeepLearning.ply'
 #Generate point cloud 
-create_output(output_points, output_colors, output_file)
+create_output(points_3D[mask_map], output_colors, output_file)
 
 cap.release()
 cv2.destroyAllWindows()
